@@ -1,0 +1,76 @@
+---
+title: "inter-annotator agreement"
+author: "Biao Yun"
+date: '2022-07-03'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+
+```{r}
+# library the package
+
+library(irr)
+library(dplyr)
+library(stringr)
+
+
+```
+
+```{r}
+# read in the dataset
+
+IAA = read.csv(file = "/Users/biaoyun/Documents/calculate_IAA/Mood_180_IAA_checker.csv", sep = ",", encoding="UTF-8")
+
+
+```
+
+```{r}
+
+IAA = subset(IAA, select = -c(id, text, checker))
+
+
+```
+
+```{r}
+
+# calculate percentage agreement
+
+agree(IAA)
+
+```
+
+```{r}
+# calculate Cohen’s kappa
+
+kappa2(IAA)
+
+# By convention, if the p value is less than 0.05, people will generally believe you when you assert that the two raters agreed more than would be expected by chance. If the p value is greater than 0.05, people will generally be skeptical.
+
+# 
+
+```
+
+
+
+```{r}
+# calculate Fleiss’s kappa
+
+#Fleiss = kappam.fleiss(IAA, exact = FALSE, detail = FALSE)
+#Fleiss
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
